@@ -18,6 +18,7 @@
 
 from __future__ import division
 import numpy as N
+import os
 
 # use fast or slow helpers
 slowfuncs = False
@@ -179,6 +180,15 @@ defaultcolormaps = {
         (255, 255, 255, 255),
         ),
     }
+
+####
+#Added by Evan Groopman 11/5/2014
+#little hack for loading LUTs.npz file in this directory
+luts = N.load(__file__.strip('colormap.py') + 'LUTs.npz')
+for lut in luts.files:
+    l = luts[lut] #get LUT
+    defaultcolormaps[lut] = tuple(map(tuple,N.around(255*l))) #convert values (0-1) to 255 max, round them, and convert array to tuples)
+####
 
 def applyScaling(data, mode, minval, maxval):
     """Apply a scaling transformation on the data.
