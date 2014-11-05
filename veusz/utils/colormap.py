@@ -18,7 +18,6 @@
 
 from __future__ import division
 import numpy as N
-import os
 
 # use fast or slow helpers
 slowfuncs = False
